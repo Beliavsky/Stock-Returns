@@ -145,7 +145,7 @@ end_date <- "2025-02-21"  # Using current date from system
 trading_days <- 252       # Standard number of trading days in a year
 rf_rate <- 0.03          # 3% annual risk-free rate
 verbose <- FALSE
-output_prices_file <- "temp.csv"
+output_prices_file <- "prices.csv"
 
 # Get prices
 prices <- get_prices(symbols, start_date, end_date, verbose = verbose)
