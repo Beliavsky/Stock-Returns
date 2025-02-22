@@ -13,7 +13,7 @@ trading_days <- 252       # Standard number of trading days in a year
 rf_rate <- 0.03           # 3% annual risk-free rate
 verbose <- FALSE
 output_prices_file <- "prices.csv"
-ticker_file <- "" # "futures_symbols.txt"         # Set to "" for no file, or e.g., "tickers.txt"
+ticker_file <- "tickers.txt"         # Set to "" for no file, or e.g., "tickers.txt"
 max_sym = 100
 
 # Determine symbols based on ticker_file
