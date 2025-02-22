@@ -4,6 +4,47 @@
 # Load required library quietly
 suppressPackageStartupMessages(library(quantmod))
 
+get_prices <- function(symbols, start_date, end_date, verbose = TRUE) {
+  # download adjusted closing prices for several symbols and merge
+  # them into one dataframe
+  
+  # Create empty list to store prices
+  price_list <- list()
+  
+  # Download data for each symbol
+  for (symbol in symbols) {
+    tryCatch({
+      # Get stock data
+      stock_data <- getSymbols(symbol, from = start_date, to = end_date, 
+                              auto.assign = FALSE)
+      
+      # Store adjusted closing prices
+      prices <- Ad(stock_data)
+      colnames(prices) <- symbol
+      price_list[[symbol]] <- prices
+      
+      # Print download status if verbose is TRUE
+      if (verbose) {
+        cat("Successfully downloaded data for", symbol, "\n")
+      }
+    }, error = function(e) {
+      cat("Error downloading", symbol, ":", conditionMessage(e), "\n")
+    })
+  }
+  
+  # Merge all prices into a dataframe
+  price_df <- do.call(merge, price_list)
+  
+  # Always print date range and number of dates
+  date_range <- range(index(price_df))
+  num_dates <- nrow(price_df)
+  cat("\n", num_dates, "days of prices from", 
+      as.character(date_range[1]), "to", 
+      as.character(date_range[2]), "\n")
+  
+  return(price_df)
+}
+
 combine_price_data <- function(input_dir, price_field = "Close", verbose = TRUE) {
   # Reads CSV files from a directory, extracts a price field, combines into a dataframe
   # Args: input_dir (string), price_field (string, default 'Close'), verbose (logical)
