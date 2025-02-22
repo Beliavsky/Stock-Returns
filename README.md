@@ -1,6 +1,6 @@
 # Stock-Returns
 Get historical daily prices from Yahoo Finance for specified stock symbols, compute returns, and analyze them.
-Sample output:
+Sample output from `xget_prices_compute_returns.r`:
 
 ```
  2045 dates of prices from 2017-01-03 to 2025-02-20 
