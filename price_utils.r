@@ -1,8 +1,9 @@
 # price_utils.R
 # Utility functions for price data handling
 
-# Load required library quietly
+# Load required libraries quietly
 suppressPackageStartupMessages(library(quantmod))
+suppressPackageStartupMessages(library(moments))
 
 get_prices <- function(symbols, start_date, end_date, verbose = TRUE) {
   # download adjusted closing prices for several symbols and merge
